@@ -3,6 +3,7 @@ package com.davidonus.jpa.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.davidonus.jpa.dao.AlienRepo;
@@ -13,7 +14,7 @@ public class AlienController {
 
 	@Autowired
 	AlienRepo repo;
-	
+
 	@RequestMapping("/")
 	public String home() {
 
@@ -37,6 +38,30 @@ public class AlienController {
 		System.out.println("Alien Submitted");
 		repo.save(alien);
 		return "home.jsp";
+	}
+
+	@RequestMapping("/showAlien")
+	public ModelAndView showAlien(@RequestParam int aid) {
+		ModelAndView mv = new ModelAndView("showAlien.jsp");
+	try {	
+		Alien alien = repo.findById(aid).orElse(new Alien());
+		mv.addObject(alien);
+		System.out.println("Alien Retrieved");
+		}
+	catch(Exception e){
+		System.err.println("Alien ID not working");
+		}
+	finally {
+		return mv;
+	}}
+
+	@RequestMapping("/getAlien")
+	public ModelAndView getAlien(@RequestParam int aid) {
+		ModelAndView mv = new ModelAndView("showAlien.jsp");
+		Alien alien = repo.findById(aid).orElse(null);
+		System.out.println("Fetching Alien");
+		System.out.println(repo.findByTech("Java"));
+		return mv;
 	}
 
 }

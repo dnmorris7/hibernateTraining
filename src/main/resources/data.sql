@@ -1,1 +1,1 @@
-insert into alien values (101, 'Davidium');
+insert into alien values (101, 'Davidium', 'Java');

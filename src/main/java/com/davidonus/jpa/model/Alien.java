@@ -10,22 +10,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Entity
 public class Alien {
 	@Id
-	private int id;
+	private int aid;
 	private String name;
-
+	private String tech;
 	
 	
 	public Alien() {
-		this.id = 00;
+		this.aid = 00;
 		this.name = "Hello Worlder";
-		
+		this.tech="Java";
 	}
 	
-	public int getId() {
-		return id;
+	public int getAid() {
+		return aid;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setAid(int aid) {
+		this.aid = aid;
 	}
 	public String getName() {
 		return name;
@@ -33,5 +33,11 @@ public class Alien {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	public String getTech() {
+		return tech;
+	}
+
+	public void setTech(String tech) {
+		this.tech = tech;
+	}
 }
