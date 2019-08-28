@@ -1,5 +1,8 @@
 package com.davidonus.jpa.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -71,16 +74,16 @@ public class AlienController {
 	//return raw data
 	@RequestMapping("/aliens/")
 	@ResponseBody //<--so it doesn't go looking for a jsp
-	public String getAliens() {
+	public List<Alien> getAliens() {
 	
-		return repo.findAll().toString();
+		return repo.findAll();
 	}
 	
 	@RequestMapping("/aliens/{aid}")
 	@ResponseBody //for returning raw data
-	public String getAlien(@PathVariable("aid") int aid) {
+	public Optional<Alien> getAlien(@PathVariable("aid") int aid) {
 		
-		return repo.findById(aid).toString();
+		return repo.findById(aid);
 	}
 
 }
