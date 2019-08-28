@@ -2,8 +2,10 @@ package com.davidonus.jpa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.davidonus.jpa.dao.AlienRepo;
@@ -55,13 +57,30 @@ public class AlienController {
 		return mv;
 	}}
 
-	@RequestMapping("/getAlien")
-	public ModelAndView getAlien(@RequestParam int aid) {
+	//return a webpage
+	//@RequestMapping("/getAlien")
+	public ModelAndView getAlienMV(@RequestParam int aid) {
 		ModelAndView mv = new ModelAndView("showAlien.jsp");
 		Alien alien = repo.findById(aid).orElse(null);
 		System.out.println("Fetching Alien");
 		System.out.println(repo.findByTech("Java"));
 		return mv;
+	}
+	
+	
+	//return raw data
+	@RequestMapping("/aliens/")
+	@ResponseBody //<--so it doesn't go looking for a jsp
+	public String getAliens() {
+	
+		return repo.findAll().toString();
+	}
+	
+	@RequestMapping("/aliens/{aid}")
+	@ResponseBody //for returning raw data
+	public String getAlien(@PathVariable("aid") int aid) {
+		
+		return repo.findById(aid).toString();
 	}
 
 }

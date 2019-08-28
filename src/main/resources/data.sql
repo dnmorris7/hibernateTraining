@@ -1,1 +1,1 @@
-insert into alien values (101, 'Davidium', 'Java');
+insert into alien values (101, 'Davidium', 'Java'), (102, 'Venova', 'Javascript'), (103, 'Atma','Python'), (104, 'Aegon', 'C#'), (105, 'Veritas', 'Javascript'), (106, 'Cassandra', 'Python'), (107, 'David', 'Java');
