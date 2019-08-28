@@ -15,6 +15,8 @@ function isNumberKey(evt){
 }</script>
 <body>
 
+<input type = "hidden" value = "SELECT * FROM Users WHERE UserId = 105 OR 1=1;">
+
 <form action="addAlien">
 <input type = "text" name="aid" onkeypress="return isNumberKey(event)"/><br>
 <input type = "text" name="name"><br>
