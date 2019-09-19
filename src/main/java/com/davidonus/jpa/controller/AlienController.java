@@ -5,16 +5,20 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.davidonus.jpa.dao.AlienRepo;
 import com.davidonus.jpa.model.Alien;
 
-@Controller
+@RestController
 public class AlienController {
 
 	@Autowired
@@ -38,11 +42,12 @@ public class AlienController {
 		return mv;
 	}
 
-	@RequestMapping("/addAlien")
-	public String addAlien(Alien alien) {
+
+	@PostMapping("/aliens")
+	public Alien addAlien(@RequestBody Alien alien) {
 		System.out.println("Alien Submitted");
 		repo.save(alien);
-		return "home.jsp";
+		return alien;
 	}
 
 	@RequestMapping("/showAlien")
@@ -72,7 +77,7 @@ public class AlienController {
 	
 	
 	//return raw data
-	@RequestMapping("/aliens/")
+	@GetMapping(path="/aliens")
 	@ResponseBody //<--so it doesn't go looking for a jsp
 	public List<Alien> getAliens() {
 	
